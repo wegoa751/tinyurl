@@ -9,9 +9,14 @@
 fetch('/urls.json')
 .then(res => res.json())
 .then(urls => {
-    const path = window.location.pathname.substring(1); // get "/aB3x9"
-    if(urls[path]){
-        window.location.href = urls[path];
+    // Remove leading "/" and ".craft" from path
+    let path = window.location.pathname.substring(1); 
+    if (path.endsWith('.craft')) {
+        path = path.slice(0, -6); // remove ".craft"
+    }
+
+    if (urls[path]) {
+        window.location.href = urls[path]; // redirect
     } else {
         document.body.innerHTML = "URL not found";
     }
