@@ -6,15 +6,14 @@
 </head>
 <body>
 <script>
-fetch('/urls.json')
+fetch('/tinyurl/urls.json')   // include /tinyurl/ folder in path
 .then(res => res.json())
 .then(urls => {
-    // Remove leading "/" and ".craft" from path
-    let path = window.location.pathname.substring(1); 
-    if (path.endsWith('.craft')) {
-        path = path.slice(0, -6); // remove ".craft"
-    }
-
+    let path = window.location.pathname.substring(1); // remove leading "/"
+    // remove folder name
+    if(path.startsWith('tinyurl/')) path = path.replace('tinyurl/', '');
+    if (path.endsWith('.craft')) path = path.slice(0, -6); // remove ".craft"
+    
     if (urls[path]) {
         window.location.href = urls[path]; // redirect
     } else {
