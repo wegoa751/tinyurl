@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting...</title>
+</head>
+<body>
+<script>
+fetch('/urls.json')
+.then(res => res.json())
+.then(urls => {
+    const path = window.location.pathname.substring(1); // get "/aB3x9"
+    if(urls[path]){
+        window.location.href = urls[path];
+    } else {
+        document.body.innerHTML = "URL not found";
+    }
+});
+</script>
+</body>
+</html>
